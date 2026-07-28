@@ -6,11 +6,6 @@
 #include "pin_config.h"
 #include <Wire.h>
 #include "esp_flash.h"
-#define U8G2_USE_LARGE_FONTS
-#ifndef U8G2_FONT_SECTION
-#define U8G2_FONT_SECTION(name)
-#endif
-#include "font/u8g2_font_unifont_h_cjk.h"
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(
   LCD_CS, LCD_SCLK, LCD_SDIO0, LCD_SDIO1, LCD_SDIO2, LCD_SDIO3);
@@ -119,6 +114,8 @@ void setup() {
   Serial.begin(115200); Wire.begin(IIC_SDA, IIC_SCL);
   if (!gfx->begin()) { Serial.println("FAIL"); return; }
   bus->writeC8D8(0x36, 0xA0); gfx->setBrightness(255);
+  gfx->setUTF8Print(true);
+  gfx->setFont(u8g2_font_unifont_h_cjk);
   init_data();
   randomSeed(esp_random());
   show_splash();
