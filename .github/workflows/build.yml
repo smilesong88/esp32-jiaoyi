@@ -1,9 +1,7 @@
 name: Build 焦易林
-
 on:
   push:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,19 +13,14 @@ jobs:
           platforms: |
             - source-url: 'https://espressif.github.io/arduino-esp32/package_esp32_index.json'
               name: 'esp32:esp32'
-          cli-version: 'latest'
           libraries: |
             - name: 'GFX Library for Arduino'
-          sketch-paths: 'esp32-jiaoyi.ino'
+          sketch-paths: |
+            - .
           enable-deltas-report: false
       - name: Find firmware
-        run: find . -name "*.bin" -type f
-     - name: List all generated files
-        run: |
-          echo "=== workspace files ==="
-          find . -type f | head -50
-          echo ""
-          echo "=== search .bin files ==="
-          find / -name "esp32-jiaoyi*" -type f 2>/dev/null | head -20
-          find /tmp -name "*.bin" -type f 2>/dev/null | head -10
-          find /home/runner -name "*.bin" -type f 2>/dev/null | head -10
+        run: find /home/runner -name "esp32*.bin" -type f 2>/dev/null | head -10
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: /home/runner/**/esp32*.bin
