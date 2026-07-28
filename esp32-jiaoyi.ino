@@ -2,6 +2,7 @@
 // Data at flash 0x400000 (yilin.bin, 141KB, 4026 entries)
 
 #define U8G2_USE_LARGE_FONTS
+#define U8G2_FONT_SECTION(name)
 #include <Arduino.h>
 #include "Arduino_GFX_Library.h"
 #include "pin_config.h"
