@@ -6,7 +6,7 @@
 #include "pin_config.h"
 #include <Wire.h>
 #include "esp_flash.h"
-#include "u8g2_font_unifont_h_cjk.h"
+#include "font/u8g2_font_unifont_h_cjk.h"
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(
   LCD_CS, LCD_SCLK, LCD_SDIO0, LCD_SDIO1, LCD_SDIO2, LCD_SDIO3);
