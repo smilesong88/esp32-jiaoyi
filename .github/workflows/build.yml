@@ -22,7 +22,12 @@ jobs:
           enable-deltas-report: false
       - name: Find firmware
         run: find . -name "*.bin" -type f
-      - uses: actions/upload-artifact@v4
-        with:
-          name: firmware
-          path: '**/*.bin'
+     - name: List all generated files
+        run: |
+          echo "=== workspace files ==="
+          find . -type f | head -50
+          echo ""
+          echo "=== search .bin files ==="
+          find / -name "esp32-jiaoyi*" -type f 2>/dev/null | head -20
+          find /tmp -name "*.bin" -type f 2>/dev/null | head -10
+          find /home/runner -name "*.bin" -type f 2>/dev/null | head -10
