@@ -6,6 +6,7 @@
 #include "pin_config.h"
 #include <Wire.h>
 #include "esp_flash.h"
+#include "u8g2_font_unifont_h_cjk.h"
 
 Arduino_DataBus *bus = new Arduino_ESP32QSPI(
   LCD_CS, LCD_SCLK, LCD_SDIO0, LCD_SDIO1, LCD_SDIO2, LCD_SDIO3);
@@ -46,6 +47,7 @@ void init_data() {
   char magic[5] = {0}; esp_flash_read(NULL, magic, DATA_ADDR, 4);
   if (strncmp(magic, "YILN", 4) != 0) {
     gfx->fillScreen(BLACK);
+    gfx->setFont(u8g2_font_unifont_h_cjk);
     gfx->setCursor(80, 200); gfx->setTextColor(RED); gfx->setTextSize(2);
     gfx->println("NO DATA - Flash yilin.bin at 0x400000");
     while(1) delay(1000);
@@ -64,8 +66,9 @@ void init_data() {
 void show_splash() {
   gfx->fillScreen(BLACK);
   for (int i = 0; i < 10; i++) gfx->drawRect(i, i, 480 - 2*i, 480 - 2*i, GOLD);
-  gfx->setCursor(140, 100); gfx->setTextColor(GOLD); gfx->setTextSize(10); gfx->print("焦易");
-  gfx->setCursor(100, 260); gfx->setTextColor(WHITE); gfx->setTextSize(3); gfx->print("JIAO SHI YI LIN");
+  gfx->setFont(u8g2_font_unifont_h_cjk);
+  gfx->setCursor(140, 100); gfx->setTextColor(GOLD); gfx->setTextSize(3); gfx->print("焦易");
+  gfx->setCursor(100, 260); gfx->setTextColor(WHITE); gfx->setTextSize(2); gfx->print("JIAO SHI YI LIN");
   gfx->setCursor(130, 320); gfx->setTextColor(GRAY); gfx->setTextSize(1);
   gfx->printf("%d Verses", num_entries);
   delay(3000);
@@ -82,6 +85,7 @@ void draw_gua(uint32_t idx) {
 
   gfx->fillScreen(BLACK);
   gfx->drawRect(0, 0, 480, 480, GOLD); gfx->drawRect(2, 2, 476, 476, GOLD);
+  gfx->setFont(u8g2_font_unifont_h_cjk);
   gfx->setCursor(10, 20); gfx->setTextColor(GOLD); gfx->setTextSize(2); gfx->print("焦氏易林");
   gfx->setCursor(320, 25); gfx->setTextColor(GRAY); gfx->setTextSize(1); gfx->printf("#%d", idx + 1);
   gfx->drawFastHLine(10, 55, 460, GOLD);
