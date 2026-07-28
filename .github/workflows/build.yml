@@ -20,7 +20,9 @@ jobs:
             - name: 'GFX Library for Arduino'
           sketch-paths: 'esp32-jiaoyi.ino'
           enable-deltas-report: false
+      - name: Find firmware
+        run: find . -name "*.bin" -type f
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: '*.bin'
+          path: '**/*.bin'
