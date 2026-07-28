@@ -18,9 +18,9 @@ jobs:
           sketch-paths: |
             - .
           enable-deltas-report: false
-      - name: Find firmware
-        run: find /home/runner -name "esp32*.bin" -type f 2>/dev/null | head -10
+      - name: Copy firmware
+        run: cp /home/runner/.cache/arduino/sketches/*/esp32-jiaoyi.ino.bin ./firmware.bin
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: /home/runner/**/esp32*.bin
+          path: firmware.bin
