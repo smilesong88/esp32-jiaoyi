@@ -19,7 +19,7 @@ jobs:
             - .
           enable-deltas-report: false
       - name: Copy firmware
-        run: cp /home/runner/.cache/arduino/sketches/*/esp32-jiaoyi.ino.bin ./firmware.bin
+        run: cp /home/runner/.cache/arduino/sketches/*/esp32-jiaoyi.ino.merged.bin ./firmware.bin
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
