@@ -1,4 +1,4 @@
-name: Build 焦易
+name: Build 焦易林
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
           libraries: |
             - name: 'GFX Library for Arduino'
           sketch-paths: 'jiaoyi.ino'
-            - .
+          enable-deltas-report: false
       - uses: actions/upload-artifact@v4
         with:
           name: firmware
