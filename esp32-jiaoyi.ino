@@ -1,6 +1,7 @@
 // 焦氏易林 - ESP32-S3 480x480 AMOLED · 四庫全書本
 // Data at flash 0x400000 (yilin.bin, 141KB, 4026 entries)
 
+#define U8G2_USE_LARGE_FONTS
 #include <Arduino.h>
 #include "Arduino_GFX_Library.h"
 #include "pin_config.h"
@@ -114,7 +115,6 @@ void setup() {
   Serial.begin(115200); Wire.begin(IIC_SDA, IIC_SCL);
   if (!gfx->begin()) { Serial.println("FAIL"); return; }
   bus->writeC8D8(0x36, 0xA0); gfx->setBrightness(255);
-  gfx->setUTF8Print(true);
   gfx->setFont(u8g2_font_unifont_h_cjk);
   init_data();
   randomSeed(esp_random());
