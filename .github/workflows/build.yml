@@ -18,7 +18,7 @@ jobs:
           cli-version: 'latest'
           libraries: |
             - name: 'GFX Library for Arduino'
-          sketch-paths: 'jiaoyi.ino'
+          sketch-paths: 'esp32-jiaoyi.ino'
           enable-deltas-report: false
       - uses: actions/upload-artifact@v4
         with:
